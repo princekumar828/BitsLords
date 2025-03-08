@@ -8,7 +8,6 @@ const navItems = [
   { name: "Home", type: "link" },
   { name: "Aricles", type: "link" },
   { name: "Pages", type: "dropdown", items: ["About", "Contact"] },
-  { name: "Pricing", type: "link" },
   { name: "Faq", type: "link" },
 ];
 
@@ -90,6 +89,13 @@ function Header() {
           rounded-full text-blue-500"
           >
             Sign in
+          </Link>
+          <Link to="/createpost"
+            className="border-2 mt-5 lg:mt-0 border-hard-dark font-semibold px-6 py-2 
+          hover:bg-hard-dark hover:text-white transition-all duration-300
+          rounded-full text-hard-dark"
+          >
+            Create Post
           </Link>
         </div>
       </header>

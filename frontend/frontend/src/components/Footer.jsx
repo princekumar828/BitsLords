@@ -127,7 +127,7 @@ const Footer = () => {
             <AiFillHeart className="w-7 h-auto" />
           </div>
           <p className="font-bold italic text-[#5A7184]">
-            Copyright © 2023. Crafted with love.
+            Copyright © 2025. Crafted with love.
           </p>
         </div>
       </footer>

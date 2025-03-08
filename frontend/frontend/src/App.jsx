@@ -5,6 +5,7 @@ import HomePage from './pages/home/HomePage'
 import ArticleDetailPage from './pages/articleDetail/ArticleDetailPage'
 import LoginPage from './pages/login/LoginPage'
 import RegistrationForm from './pages/register/Register'
+import CreatePost from './pages/CreatePost/CreatePost'
 
 function App() {
   
@@ -15,6 +16,7 @@ function App() {
       <Route path='/article/:id' element={<ArticleDetailPage/>}/>
       <Route path='/login' element={<LoginPage/>}/>
       <Route path='/register' element={<RegistrationForm/>}/>
+      <Route path='/createpost' element={<CreatePost/>}/>
     </Routes>
     </div >
   )
