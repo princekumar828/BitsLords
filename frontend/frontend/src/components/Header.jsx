@@ -11,6 +11,7 @@ const navItems = [
   { name: "Faq", type: "link" },
 ];
 
+import Logo from '../assets/Logo.jpg'
 const NavList = ({ item }) => {
   return (
     <li className="relative group ">
@@ -58,7 +59,7 @@ function Header() {
     <section className="sticky top-0 left-0 right-0 z-50 bg-white">
       <header className="container mx-auto px-5 flex justify-between py-4 items-center">
         <div>
-          <img  alt="logo" className="w-16" />
+          <img src="Logo" alt="logo" className="w-16" />
         </div>
         <div className="z-50 lg:hidden">
           {!navVisible ? (
