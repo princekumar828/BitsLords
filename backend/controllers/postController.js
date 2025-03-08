@@ -4,22 +4,26 @@ import Post from "../models/Post.js";
 // @desc    Create a new post
 // @route   POST /api/posts
 // @access  Private (Only logged-in users)
-const createPost = asyncHandler(async (req, res) => {
-  const { title, content } = req.body;
 
-  if (!title || !content) {
-    res.status(400);
-    throw new Error("Title and content are required");
+const createPost = async (req, res) => {
+  try {
+    const { title, content } = req.body;
+    const mediaPath = req.file ? `/uploads/${req.file.filename}` : null; // Store relative path
+
+    const newPost = new Post({
+      title,
+      content,
+      user : req.user.id,
+      mediaUrl: mediaPath, // Store media path
+    });
+
+    await newPost.save();
+
+    res.status(201).json(newPost);
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error });
   }
-
-  const post = await Post.create({
-    user: req.user._id, // Logged-in user
-    title,
-    content,
-  });
-
-  res.status(201).json(post);
-});
+};
 
 // @desc    Get all posts (Public)
 // @route   GET /api/posts
@@ -81,4 +85,30 @@ const deletePost = asyncHandler(async (req, res) => {
   res.json({ message: "Post deleted successfully" });
 });
 
-export { createPost, getAllPosts, getMyPosts, updatePost, deletePost };
+
+// @desc Liek post
+// @route 
+// access Private
+
+const likePost = asyncHandler(async (req, res) => {
+  const post = await Post.findById(req.params.id);
+  if (!post) {
+    res.status(404);
+    throw new Error("Post not found");
+  }
+
+  if (post.likes.includes(req.user._id)) {
+    post.likes = post.likes.filter(
+      (id) => id.toString() !== req.user._id.toString()
+    );
+    res.json({ message: "Post unliked" });
+  } else {
+    post.likes.push(req.user._id);
+    res.json({ message: "Post liked" });
+  }
+
+  await post.save();
+});
+
+
+export { createPost, getAllPosts, getMyPosts, updatePost, deletePost, likePost };
